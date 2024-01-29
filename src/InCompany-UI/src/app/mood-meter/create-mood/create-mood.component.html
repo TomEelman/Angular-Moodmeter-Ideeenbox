@@ -1,0 +1,24 @@
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 ms-5 me-5">
+    <div class="selected-mood"> 
+        {{ selectedMoodValue === 1 ? '😭' : selectedMoodValue === 2 ? '😢' : selectedMoodValue === 3 ? '😐' : selectedMoodValue === 4 ? '🙂' : '😄' }}
+    </div>
+    <div class="range-container my-4">
+        <input type="range" class="form-range" min="1" max="5" step="1" id="moodRange" [(ngModel)]="selectedMoodValue" (ngModelChange)="onSelectedMoodChange($event)" [disabled]="isSliderDisabled">
+        <div class="range-values">
+            <span id="value1">1</span>
+            <span id="value2">2</span>
+            <span id="value3">3</span>
+            <span id="value4">4</span>
+            <span id="value5">5</span>
+        </div>
+    </div>
+
+    <ng-container *ngIf="moodService?.moodSubmitTimer$ | async as timer">
+        <span class="fw-bold mt-4">
+          Tijd tot je je volgende mood kan indienen
+        </span>
+        <span class="timer-container mt-4 display-2">
+            {{formatTime(timer )}}
+        </span>
+      </ng-container>
+</div>

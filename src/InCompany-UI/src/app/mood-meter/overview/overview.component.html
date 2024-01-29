@@ -1,0 +1,133 @@
+<!-- Drop down -->
+<div class="container">
+    <p class="my-1 mt-5">Grafiek keuze :</p>
+    <app-drop-down [dropdownOptions]="departmentChoice" name="userSelectedDepartment"
+        (selectedOption)="onDepartmentSelect($event)"></app-drop-down>
+
+    <label for="dateDropDown" class="my-1">kies tijd overzicht:</label>
+    <app-drop-down [dropdownOptions]="dateChoice" name="userSelectedTime"
+        (selectedOption)="onTimeSelect($event)"></app-drop-down>
+</div>
+
+<!-- Date changer buttons -->
+<div class="d-flex justify-content-between border px-5 pt-2 mt-3">
+    <div>
+        <fa-icon [icon]="this.backArrowLeft" (click)="dateChangeMinus()" class="icon-size"></fa-icon>
+    </div>
+
+    <div *ngIf="selectedDropdownTime === 'week'; else month">
+        <h4>Week {{ currentWeekNumber }} van {{ currentYear }}</h4>
+    </div>
+
+    <ng-template #month>
+        <h4>Maand {{ currentMonthNumber }} van {{ currentYear }}</h4>
+    </ng-template>
+
+    <div>
+        <fa-icon [icon]="this.backArrowRight" (click)="dateChangePlus()" class="icon-size"></fa-icon>
+    </div>
+</div>
+
+<!-- Y axis with mood -->
+<div class="p-4 graph-container">
+    <div *ngIf="selectedDropdownDepartment === 'yourMoods'; else departmentView">
+
+        <div class="vertical-axis-moodwaarde mb-2">
+            <div class="row gy-2">
+                <div *ngFor="let mood of moodAxis">
+                    <div class="border-bottom graph-line"></div>
+                    <p>{{ mood }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- x axis with date and the graph -->
+        <div *ngIf="selectedDropdownTime === 'week'; else monthGraph">
+            <div class="graph-data-container">
+                <div class="graph border-top">
+                    <div *ngFor="let mood of moodData" class="bar"
+                        [ngStyle]="{ 'height.px': mood.height, 'margin-left.rem': mood.margin, 'width.px': mood.barWidth}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="horizontal-axis-days">
+                <div class="row">
+                    <div class="col" *ngFor="let day of weekDaysAxis">
+                        <p>{{ day }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #monthGraph>
+
+            <div class="monthlyViewGraph">
+                <div class="graphMonth">
+                    <div style="width: 1px; height: 295px;"></div>
+                    <div *ngFor="let mood of moodData" class="barMonth"
+                        [ngStyle]="{ 'height.px': mood.height, 'width.px': mood.barWidth}">
+                    </div>
+                </div>
+            </div>
+
+        </ng-template>
+
+
+    </div>
+
+    <ng-template #departmentView>
+
+        <div *ngIf="this.userMoods.length <= 5; else showDepartmentView">
+            <h1 class="text-center">{{ departmentViewMessage }}</h1>
+        </div>
+
+        <ng-template #showDepartmentView>
+
+            <div class="vertical-axis-moodwaarde mb-2">
+                <div class="row gy-2">
+                    <div *ngFor="let mood of moodAxis">
+                        <div class="border-bottom graph-line"></div>
+                        <p>{{ mood }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="selectedDropdownTime === 'week'; else departmentMonthGraph">
+                <div class="graph-data-container">
+                    <div class="graph border-top">
+                        <div *ngFor="let day of getMoodDepartmentDataKeys()" class="bar"
+                            [ngStyle]="{ 'height.px': poleHeight(moodDepartmentData[day].value), 'margin-left.rem': poleMargin(moodDepartmentData[day].margin) }">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="horizontal-axis-days">
+                    <div class="row">
+                        <div class="col" *ngFor="let day of weekDaysAxis">
+                            <p>{{ day }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #departmentMonthGraph>
+                <div class="monthlyViewGraph">
+                    <div class="graphMonth">
+                        <div style="width: 1px; height: 295px;"></div>
+                        <div *ngFor="let day of getMoodDepartmentDataKeys()" class="departmentBar"
+                            [ngStyle]="{ 'height.px': poleHeight(moodDepartmentData[day].value) }">
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-template>
+    </ng-template>
+</div>
+
+<div class="container text-center" *ngIf="moodAverage > 0">
+    <p class="fw-bold">De gemiddelde mood van deze grafiek is: {{ moodAverage }}</p>
+    <div class="mood-smiley">
+        {{ moodAverage === 1 ? '😭' : moodAverage === 2 ? '😢' : moodAverage === 3 ? '😐' : moodAverage === 4 ? '🙂' : '😄' }}
+    </div>
+</div>

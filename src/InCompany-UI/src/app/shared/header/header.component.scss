@@ -1,0 +1,30 @@
+header {
+    background-color: #fa6105;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.header-settings {
+    height: 50px;
+    max-height: 50px;
+}
+
+.flex-item {
+    width: 33.33%;
+    &.center {
+        text-align: center;
+    }
+    &.right {
+        text-align: right;
+    }
+}
+
+.header-label {
+    margin-left: 5px;
+    position: absolute;
+    white-space: nowrap;
+    overflow: visible;
+}
+.text,
+.btn-link {
+    color: #ffffff;
+}

@@ -1,0 +1,74 @@
+.write-comment {
+  width: 100%;
+  min-height: 2rem;
+  height: 2rem;
+  background-color: whitesmoke;
+  border: none;
+  border-bottom: solid lightgray;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+}
+
+.write-comment:focus {
+  border-color: black;
+}
+
+.container {
+  align-items: center;
+  background-color: whitesmoke;
+}
+.comment-container {
+  background-color: whitesmoke;
+}
+
+.icon-size {
+  font-size: large;
+  color: #999;
+}
+
+.text {
+  width: 88%;
+  max-width:  88%;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-bar {
+  align-items: center;
+}
+
+.text-time {
+  font-size: small;
+  color: gray;
+}
+
+.text-name {
+  font-weight: 500;
+}
+
+.dot {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.icon-setting {
+  font-size: larger;
+}
+
+.reply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.iconTrash {
+  margin-right: 4px;
+}
+
+.subIconTrash {
+  margin-right: 3rem;
+}

@@ -1,0 +1,13 @@
+<div class="wrapper mt-5 ">
+    <div class="p-2">
+        <h3>Idee aanmaken</h3>
+    </div>
+    <form class="flex-column mt-5 ">
+        <div class=" mb-3">
+            <input maxlength="70" type="text" class="form-control timberwolf-bg" placeholder="Vul uw titel in... (max. 70 karakters)" [(ngModel)]="title" name="title">
+        </div>
+        <div>
+            <textarea maxlength="1500" type="text" class="form-control timberwolf-bg" rows="5" placeholder="Beschrijving (max. 1500 karakters)" [(ngModel)]="description" name="description"></textarea>
+        </div>
+    </form>
+</div>

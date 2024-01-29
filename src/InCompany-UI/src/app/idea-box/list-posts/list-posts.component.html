@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center" *ngFor="let post of posts">
+  <div class="post-container">
+    <div [routerLink]="['detail-post', post.ideaId]">
+      <div class="top">
+        <div class="d-flex top-inner">
+          <div class="text-style"><fa-icon class="icon-size" [icon]="iconUser"></fa-icon>
+            {{ post.userName }} <span class="dot">ꞏ&nbsp;</span></div>
+          <div class="text-position">{{ post.timeAgo }}</div>
+        </div>
+      </div>
+      <div class="center">
+        <div class="inner-center">
+          <h5 class="content-postion-title-info">
+            {{ post.title }}
+          </h5>
+          <p class="content-postion-extra-info">
+            {{ post.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom mt-4">
+      <div class="inner-bottom">
+        <div class="vote-container d-flex">
+          <fa-icon [ngStyle]="{'color': hasVoted(post, 'upvote') ? '#0077c8' : 'black'}" class="me-2"
+            [icon]="iconArrowUp" (click)="vote(post, 'upvote')"></fa-icon>
+          <div>{{ formatVotes(post.voteNumber) }}</div>
+          <fa-icon [ngStyle]="{'color': hasVoted(post, 'downvote') ? '#0077c8' : 'black'}" class="ms-2"
+            [icon]="iconArrowDown" (click)="vote(post, 'downvote')"></fa-icon>
+        </div>
+        <div class="comments-container d-flex">
+          <fa-icon class="me-2" [icon]="iconMessage"></fa-icon>
+          <div>{{ post.commentsNumber }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

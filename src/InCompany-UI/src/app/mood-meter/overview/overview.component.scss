@@ -1,0 +1,55 @@
+.graph-container {
+  width: 430px;
+  position: relative;
+}
+
+.graph-data-container {
+  margin-left: 6%;
+}
+
+.horizontal-axis-days {
+  width: 90%;
+  margin-left: 9%;
+}
+
+.graph {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.bar {
+  position: absolute;
+  width: 45px;
+  background-color: #52a4db;
+}
+
+.monthlyViewGraph {
+  position: absolute;
+  height: 295px;
+  margin-left: 5.2%;
+  top: 7%;
+}
+
+.graphMonth {
+  display: flex;
+  align-items: flex-end;
+}
+
+.barMonth {
+  background-color: #52a4db;
+  margin-left: 1px;
+}
+
+.departmentBar {
+  background-color: #52a4db;
+  width: 12.3px;
+  margin-left: 1px;
+}
+
+.icon-size {
+  font-size: 16px;
+}
+
+.mood-smiley {
+font-size: 6rem;
+}

@@ -1,0 +1,15 @@
+<ul *ngIf="myideas.length > 0; else noIdeasPlaceholder">
+    <app-list-item
+    *ngFor="let myidea of myideas"
+    [className]="'border-bottom fw-bold'"
+    [iconRight]="myidea.icon" 
+    [text]="myidea.text"
+    (onClick)="toDetailsPost(myidea.ideaId)">
+    </app-list-item>
+</ul>
+
+<ng-template #noIdeasPlaceholder>
+    <div class="placeholder-container">
+        <h4>Nog geen eigen ideeën opgegeven.</h4>
+    </div>
+</ng-template>

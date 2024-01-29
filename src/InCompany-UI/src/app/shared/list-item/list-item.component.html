@@ -1,0 +1,17 @@
+<li
+  class="wrapper {{ className }}"
+  [ngClass]="{ 'justify-content-between': iconRight }"
+  (click)="onClick.emit()"
+>
+  <div *ngIf="iconLeft">
+    <fa-icon class="icon" [icon]="iconLeft"></fa-icon>
+  </div>
+
+  <div [class.warning]="warning">
+    {{ text }}
+  </div>
+
+  <div *ngIf="iconRight">
+    <fa-icon class="icon" [icon]="iconRight"></fa-icon>
+  </div>
+</li>

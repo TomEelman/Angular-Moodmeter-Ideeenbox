@@ -1,0 +1,10 @@
+<ul >
+    <app-list-item
+    *ngFor="let setting of settings"
+    [className]="'border-bottom'"
+    [warning]="setting.warning"
+    [iconLeft]="setting.icon"
+    [text]="setting.text"
+    (onClick)="handleItemClick(setting.text)">
+    </app-list-item>
+</ul>

@@ -1,0 +1,21 @@
+<header class="border-bottom">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="flex-item left">
+      <button *ngIf="btnLeft" class="btn btn-link" (click)="onClick(btnLeft)">
+        <fa-icon [icon]="btnLeft.icon"></fa-icon>
+        <label class="header-label">{{ btnLeft.label }}</label>
+      </button>
+    </div>
+
+    <div class="flex-item text center mt-2">
+      <h5>{{ title }}</h5>
+    </div>
+    
+    <div class="flex-item right">
+      <button *ngIf="btnRight" class="btn btn-link" (click)="onClick(btnRight)">
+        <fa-icon [icon]="btnRight.icon"></fa-icon>
+        <label *ngIf="btnRight.label != ''" class="header-label">{{ btnRight.label }}</label>
+      </button>
+    </div>
+  </div>
+</header>

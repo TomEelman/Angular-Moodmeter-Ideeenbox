@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="d-flex flex-column align-items-end">
+    <textarea
+      #commentTextarea
+      class="write-comment"
+      rows="5"
+      placeholder="Comment"
+      name="description"
+      (input)="onCommentInput()"
+    ></textarea>
+    <div class="d-flex justify-content-between">
+      <fa-icon
+        class="icon-setting mt-1 me-1"
+        [icon]="iconPaperPlane"
+        (click)="saveComment()"
+      ></fa-icon>
+    </div>
+  </div>
+
+  <div *ngFor="let comment of comments | reverse">
+    <div
+      class="mx-1 mt-2 comment-container"
+      *ngIf="comment.parentCommentId === null"
+    >
+      <div class="d-flex info-bar justify-content-between">
+        <div class="d-flex">
+          <div class="me-1 text-name">
+            <fa-icon class="icon-size" [icon]="iconUser"></fa-icon>
+            {{ comment.userName }}
+          </div>
+          <div class="ms-1 text-time">
+            <span class="dot">ꞏ&nbsp;</span>{{ comment.timeAgo }}
+          </div>
+        </div>
+        <div *ngIf="user.email === comment.userId" (click)="deleteComment('mainComment', comment.commentId)">
+          <fa-icon class="iconTrash" [icon]="iconTrash"></fa-icon>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="text">
+          <div>
+            {{ comment.comment }}
+          </div>
+        </div>
+        <div class="comment-options d-flex justify-content-between">
+          <div></div>
+          <div class="reply" (click)="toggleReply(comment.commentId)">
+            <fa-icon [icon]="iconCommentDots"></fa-icon>
+          </div>
+        </div>
+        <div
+          class="d-flex flex-column"
+          *ngIf="
+            comment.showReplyInput && activeSubCommentId === comment.commentId
+          "
+        >
+          <textarea
+            #commentTextarea
+            [id]="'TextArea_' + comment.commentId"
+            class="write-comment sub-comment"
+            rows="5"
+            placeholder="Comment"
+            name="description"
+            (input)="onCommentInput(comment.commentId)"
+          ></textarea>
+          <div class="d-flex justify-content-between">
+            <div></div>
+            <div>
+              <fa-icon
+                class="icon-setting mt-1 me-1 paper-plane"
+                [icon]="iconPaperPlane"
+                (click)="saveComment(comment.commentId)"
+              ></fa-icon>
+            </div>
+          </div>
+
+          <div *ngFor="let subComment of comments | reverse">
+            <div
+              class="sub-comments-container ms-3"
+              *ngIf="subComment.parentCommentId === comment.commentId"
+            >
+              <div class="d-flex info-bar justify-content-between">
+                <div class="d-flex">
+                  <div class="me-1 text-name">
+                    <fa-icon class="icon-size" [icon]="iconUser"></fa-icon>
+                    {{ subComment.userName }}
+                  </div>
+                  <div class="ms-1 text-time">
+                    <span class="dot">ꞏ&nbsp;</span>{{ subComment.timeAgo }}
+                  </div>
+                </div>
+                <div *ngIf="user.email === subComment.userId" (click)="deleteComment('subComment', subComment.commentId, subComment.parentCommentId)">
+                  <fa-icon class="subIconTrash" [icon]="iconTrash"></fa-icon>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center flex-column">
+                <div class="text mb-4">
+                  <div>
+                    {{ subComment.comment }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

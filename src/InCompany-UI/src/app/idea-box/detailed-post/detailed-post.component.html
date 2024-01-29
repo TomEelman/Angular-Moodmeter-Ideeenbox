@@ -1,0 +1,55 @@
+<div class="post-container" *ngIf="idea">
+  <div class="top">
+    <div class="d-flex top-inner justify-content-between">
+      <div class="d-flex">
+        <div class="text-style">
+          <fa-icon class="icon-size" [icon]="iconUser"></fa-icon>
+          {{ idea.userName }} <span class="dot">ꞏ&nbsp;</span>
+        </div>
+        <div class="text-position">{{ idea.timeAgo }}</div>
+      </div>
+      <div>
+        <div *ngIf="user.email === idea.userId" (click)="deleteIdea(idea.ideaId)">
+          <fa-icon class="iconTrash" [icon]="iconTrash"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="center">
+      <div class="inner-center">
+        <h5 class="content-postion-title-info word-break">
+          {{ idea.title }}
+        </h5>
+        <p class="content-postion-extra-info word-break">
+          {{ idea.description }}
+        </p>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="inner-bottom">
+        <div class="vote-container d-flex">
+          <fa-icon
+            [ngStyle]="{
+              color: hasVoted(idea, 'upvote') ? '#0077c8' : 'black'
+            }"
+            class="me-2"
+            [icon]="iconArrowUp"
+            (click)="vote(idea, 'upvote')"
+          ></fa-icon>
+          <div>{{ formatVotes(idea.voteNumber) }}</div>
+          <fa-icon
+            [ngStyle]="{
+              color: hasVoted(idea, 'downvote') ? '#0077c8' : 'black'
+            }"
+            class="ms-2"
+            [icon]="iconArrowDown"
+            (click)="vote(idea, 'downvote')"
+          ></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-comment-sectie></app-comment-sectie>
